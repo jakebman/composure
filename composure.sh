@@ -403,8 +403,8 @@ metafor ()
   # this sed-fu is the retrieval half of the 'metadata' system:
   # 'grep' for the metadata keyword, and then parse/filter the matching line
 
-  # grep keyword # strip trailing '|"|; # ignore thru keyword and leading '|"
-  sed -n "/$keyword / s/['\";]*\$//;s/^[ 	]*\(: _\)*$keyword ['\"]*\([^([].*\)*\$/\2/p"
+  # strip trailing quote, semicolon. Ignore thru keyword and leading quote
+  sed -En "s/['\"]?;?\$//g; s/^\s*(:\s+_)?${keyword}\s+['\"]?//p"
 }
 
 reference ()
